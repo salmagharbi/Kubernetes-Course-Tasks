@@ -5,6 +5,7 @@
 minikube start --nodes 3 --cni=calico --cpus=2 --memory=2200
 kubectl get nodes
 ```
+![nodes](screenshots.01-nodes.png.png)
 ## Deployment
 Files: `deployment.yaml`
 ```bash
@@ -12,14 +13,14 @@ kubectl create namespace webapp
 kubectl apply -f deployment.yaml
 kubectl get pods -n webapp -o wide
 ```
-![pods](screenshots/02-pods.png)
+![pods](screenshots.02-pods.png.png)
 
 ## Timestamp updates
 ```bash
 kubectl port-forward -n webapp deploy/web-deployment 8080:80
 ```
-![time 1](screenshots/03-time-1.png)
-![time 2](screenshots/04-time-2.png)
+![time 1](screenshots.03-time-1.png.png)
+![time 2](screenshots.04-time-2.png.png)
 
 ## Step 5: Failing init container
 Answers:
@@ -27,12 +28,12 @@ Answers:
 - **Do nginx and time-updater start?** No. Init containers must complete successfully first.
 - **Is the page still reachable?** Yes. The rolling update keeps the 3 old healthy Pods running until a new Pod becomes Ready.
 
-- ![failing pods](screenshots/05-failing-pods.png)
-![describe](screenshots/06-describe.png)
+- ![failing pods](screenshots.05-failing-pods.png.png)
+![describe](screenshots.06-describe.png.png)
 
 ## Step 6: Fix
 Restored the init command to `echo done`.
-![fixed](screenshots/07-fixed.png)
+![fixed](screenshots.07-fixed.png.png)
 
 ## Verification checks
-![checks](screenshots/08-checks.png)
+![checks](screenshots.08-checks.png.png)
